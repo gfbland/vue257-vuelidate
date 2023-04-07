@@ -1,20 +1,17 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div>
+    <div :class="{ valid: !v$.$error && v$.$dirty, error: v$.$error }">
+      <input type="text" v-model="v$.number.$model" />
+    </div>
+    <div v-for="(error, index) in v$.number.$errors" :key="index">
+      {{ error.$message }}
+    </div>
+    <button @click="showAll = !showAll">Toggle All Output</button>
+    <pre v-show="showAll">{{ v$ }}</pre>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+<script lang="ts" src="./app.ts"></script>
 
 <style>
 #app {
